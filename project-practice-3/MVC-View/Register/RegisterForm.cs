@@ -21,5 +21,14 @@ namespace project_practice_3.MVC_View.Register
         {
 
         }
+
+        private void btnRT_Click(object sender, EventArgs e)
+        {
+            // define singer variable
+            string fingerType = "Rigth Thumb";
+            Scanner scanner = new Scanner(fingerType);
+            scanner.ShowDialog();
+
+        }
     }
 }

@@ -149,6 +149,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>patient-db.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\Close-white-small.png" />
+    <None Include="Resources\right-hand.png" />
+    <None Include="Resources\Image1.png" />
     <None Include="Resources\left-hand.png" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using project_practice_3.MVC_View.Register;
 
 namespace project_practice_3.MVC_View.Login
 {
@@ -17,6 +18,12 @@ namespace project_practice_3.MVC_View.Login
         {
             InitializeComponent();
             this.masterForm = masterForm;
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.ShowDialog();
         }
     }
 }

@@ -63,9 +63,29 @@ namespace project_practice_3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Close_white_small {
+            get {
+                object obj = ResourceManager.GetObject("Close-white-small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap left_hand {
             get {
                 object obj = ResourceManager.GetObject("left-hand", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_hand {
+            get {
+                object obj = ResourceManager.GetObject("right-hand", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
