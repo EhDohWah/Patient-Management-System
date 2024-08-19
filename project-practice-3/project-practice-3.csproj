@@ -60,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -83,6 +84,12 @@
     <Compile Include="MVC-View\Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MVC-View\Register\PatientDataView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Register\PatientDataView.Designer.cs">
+      <DependentUpon>PatientDataView.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVC-View\Register\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Register\PatientDataView.resx">
+      <DependentUpon>PatientDataView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Register\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
@@ -136,6 +146,7 @@
   <ItemGroup>
     <Folder Include="MVC-Controller\" />
     <Folder Include="MVC-Model\" />
+    <Folder Include="MVC-View\Checkin\" />
     <Folder Include="MVC-View\ID-Printer\" />
     <Folder Include="MVC-View\Ipd\" />
     <Folder Include="MVC-View\Opd\" />
@@ -149,6 +160,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>patient-db.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\logo.png" />
     <None Include="Resources\Close-white-small.png" />
     <None Include="Resources\right-hand.png" />
     <None Include="Resources\Image1.png" />

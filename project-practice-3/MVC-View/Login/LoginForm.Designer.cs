@@ -28,57 +28,58 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.gbxLogin = new System.Windows.Forms.GroupBox();
+            this.btnLogin = new System.Windows.Forms.Button();
             this.pbxPMS = new System.Windows.Forms.PictureBox();
-            this.btnRegister = new System.Windows.Forms.Button();
             this.gbxLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPMS)).BeginInit();
             this.SuspendLayout();
             // 
             // gbxLogin
             // 
-            this.gbxLogin.Controls.Add(this.btnRegister);
+            this.gbxLogin.Controls.Add(this.btnLogin);
             this.gbxLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbxLogin.Location = new System.Drawing.Point(3, 2);
-            this.gbxLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gbxLogin.Location = new System.Drawing.Point(2, 2);
+            this.gbxLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbxLogin.Name = "gbxLogin";
-            this.gbxLogin.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gbxLogin.Size = new System.Drawing.Size(441, 476);
+            this.gbxLogin.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbxLogin.Size = new System.Drawing.Size(331, 387);
             this.gbxLogin.TabIndex = 0;
             this.gbxLogin.TabStop = false;
             this.gbxLogin.Text = "Login Here";
             // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(111, 136);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(91, 35);
+            this.btnLogin.TabIndex = 0;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnRegister_Click);
+            // 
             // pbxPMS
             // 
-            this.pbxPMS.Image = ((System.Drawing.Image)(resources.GetObject("pbxPMS.Image")));
-            this.pbxPMS.Location = new System.Drawing.Point(449, 16);
-            this.pbxPMS.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbxPMS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbxPMS.Image = global::project_practice_3.Properties.Resources.logo;
+            this.pbxPMS.Location = new System.Drawing.Point(337, 10);
+            this.pbxPMS.Margin = new System.Windows.Forms.Padding(2);
             this.pbxPMS.Name = "pbxPMS";
-            this.pbxPMS.Size = new System.Drawing.Size(413, 448);
+            this.pbxPMS.Size = new System.Drawing.Size(318, 379);
             this.pbxPMS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxPMS.TabIndex = 1;
             this.pbxPMS.TabStop = false;
             // 
-            // btnRegister
-            // 
-            this.btnRegister.Location = new System.Drawing.Point(139, 133);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(157, 59);
-            this.btnRegister.TabIndex = 0;
-            this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
-            // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pbxPMS);
             this.Controls.Add(this.gbxLogin);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "LoginForm";
-            this.Size = new System.Drawing.Size(873, 481);
+            this.Size = new System.Drawing.Size(655, 391);
             this.gbxLogin.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbxPMS)).EndInit();
             this.ResumeLayout(false);
@@ -89,6 +90,6 @@
 
         private System.Windows.Forms.GroupBox gbxLogin;
         private System.Windows.Forms.PictureBox pbxPMS;
-        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
