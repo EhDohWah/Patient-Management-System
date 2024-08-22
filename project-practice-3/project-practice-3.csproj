@@ -78,11 +78,23 @@
     <Compile Include="Master.Designer.cs">
       <DependentUpon>Master.cs</DependentUpon>
     </Compile>
+    <Compile Include="MVC-View\Ipd\PatientIPDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Ipd\PatientIPDForm.Designer.cs">
+      <DependentUpon>PatientIPDForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVC-View\Login\LoginForm.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="MVC-View\Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Opd\PatientOPDForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Opd\PatientOPDForm.Designer.cs">
+      <DependentUpon>PatientOPDForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-View\Register\PatientDataView.cs">
       <SubType>Form</SubType>
@@ -107,8 +119,14 @@
     <EmbeddedResource Include="Master.resx">
       <DependentUpon>Master.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Ipd\PatientIPDForm.resx">
+      <DependentUpon>PatientIPDForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Opd\PatientOPDForm.resx">
+      <DependentUpon>PatientOPDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Register\PatientDataView.resx">
       <DependentUpon>PatientDataView.cs</DependentUpon>
@@ -146,10 +164,9 @@
   <ItemGroup>
     <Folder Include="MVC-Controller\" />
     <Folder Include="MVC-Model\" />
-    <Folder Include="MVC-View\Checkin\" />
+    <Folder Include="MVC-View\Dashboard\" />
     <Folder Include="MVC-View\ID-Printer\" />
-    <Folder Include="MVC-View\Ipd\" />
-    <Folder Include="MVC-View\Opd\" />
+    <Folder Include="MVC-View\Patient-Transfer\" />
     <Folder Include="MVC-View\Reports\" />
   </ItemGroup>
   <ItemGroup>
