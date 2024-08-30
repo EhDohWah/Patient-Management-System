@@ -57,6 +57,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="libzkfpcsharp, Version=1.0.0.1, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\libzkfpcsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -77,6 +81,26 @@
     </Compile>
     <Compile Include="Master.Designer.cs">
       <DependentUpon>Master.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-Controller\BitmapFormat.cs" />
+    <Compile Include="MVC-Controller\FingerPrintDeviceController.cs" />
+    <Compile Include="MVC-View\Authenticate\Authentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Authenticate\Authentication.Designer.cs">
+      <DependentUpon>Authentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.Designer.cs">
+      <DependentUpon>FingerPrint Authentication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Dashboard\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Dashboard\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-View\Ipd\PatientIPDForm.cs">
       <SubType>Form</SubType>
@@ -102,22 +126,28 @@
     <Compile Include="MVC-View\Register\PatientDataView.Designer.cs">
       <DependentUpon>PatientDataView.cs</DependentUpon>
     </Compile>
+    <Compile Include="MVC-View\Register\PatientFormDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Register\PatientFormDetail.Designer.cs">
+      <DependentUpon>PatientFormDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVC-View\Register\RegisterForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MVC-View\Register\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MVC-View\Register\Scanner.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MVC-View\Register\Scanner.Designer.cs">
-      <DependentUpon>Scanner.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Master.resx">
       <DependentUpon>Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Authenticate\Authentication.resx">
+      <DependentUpon>Authentication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.resx">
+      <DependentUpon>FingerPrint Authentication.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Ipd\PatientIPDForm.resx">
       <DependentUpon>PatientIPDForm.cs</DependentUpon>
@@ -131,11 +161,11 @@
     <EmbeddedResource Include="MVC-View\Register\PatientDataView.resx">
       <DependentUpon>PatientDataView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Register\PatientFormDetail.resx">
+      <DependentUpon>PatientFormDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Register\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MVC-View\Register\Scanner.resx">
-      <DependentUpon>Scanner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -162,9 +192,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVC-Controller\" />
     <Folder Include="MVC-Model\" />
-    <Folder Include="MVC-View\Dashboard\" />
+    <Folder Include="MVC-View\Authenticate\Barcode\" />
+    <Folder Include="MVC-View\BarCode-Scanner\" />
     <Folder Include="MVC-View\ID-Printer\" />
     <Folder Include="MVC-View\Patient-Transfer\" />
     <Folder Include="MVC-View\Reports\" />
