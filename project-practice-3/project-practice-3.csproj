@@ -83,7 +83,6 @@
       <DependentUpon>Master.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-Controller\BitmapFormat.cs" />
-    <Compile Include="MVC-Controller\FingerPrintDeviceController.cs" />
     <Compile Include="MVC-View\Authenticate\Authentication.cs">
       <SubType>Form</SubType>
     </Compile>
