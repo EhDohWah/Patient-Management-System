@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using libzkfpcsharp;
+using Microsoft.EntityFrameworkCore;
 using project_practice_3.MVC_Controller;
+using project_practice_3.MVC_Model;
 using project_practice_3.MVC_View.Register;
 
 namespace project_practice_3.MVC_View.Register
@@ -25,6 +29,8 @@ namespace project_practice_3.MVC_View.Register
         #region -------- FIELDS --------
 
         Thread captureThread = null;
+        CancellationTokenSource _cancellationTokenSource;
+
         const int REGISTER_FINGER_COUNT = 3;
 
         zkfp fpInstance = new zkfp();
@@ -52,6 +58,9 @@ namespace project_practice_3.MVC_View.Register
         // Dictionary to hold fingerprint templates in memory
         private Dictionary<string, string> fingerprintTemplates = new Dictionary<string, string>();
         public static string fingerID;
+        public static string generatedPID;
+
+        DatabaseConnection _context = new DatabaseConnection();
 
         #endregion
 
@@ -62,12 +71,11 @@ namespace project_practice_3.MVC_View.Register
             InitializeComponent();
             btnDisconnect.Enabled = false;
             lblStatusLabel.Visible = false;
-            gbxFingers.Enabled = false;
+            tclFingerPrintControl.Enabled = false;
             lblFingerPrintCount.Visible = false;
             gbxFingerPrintStatus.Enabled = false;
             btnStartReg.Enabled = false;
             FormHandle = this.Handle;
-
             gpxGeneratedPID.Enabled = false;
 
         }
@@ -123,23 +131,20 @@ namespace project_practice_3.MVC_View.Register
                 zkfp2.ByteArray2Int(paramValue, ref mfpHeight);
 
                 FPBuffer = new byte[mfpWidth * mfpHeight];
-
+                bIsTimeToDie = false;
 
                 // Create a thread to retrieve any new fingerprint and handle device events
                 captureThread = new Thread(new ThreadStart(DoCapture));
                 captureThread.IsBackground = true;
                 captureThread.Start();
+
                 btnStartReg.Enabled = true;
                 gpxGeneratedPID.Enabled = true;
-                bIsTimeToDie = false;
-
-
-
+                
                 // Connected Successfully
                 MessageBox.Show("Fingerprint Device Connected Successfully!", "Device Connection Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //toolStripStatusLabel1.Text = "The device is successfully connected";
                 //toolStripStatusLabel1.BackColor = Color.FromArgb(79, 208, 154);
-
 
                 string devSN = fpInstance.devSn;
                 tbxDeviceInfo.Text = devSN;
@@ -317,6 +322,7 @@ namespace project_practice_3.MVC_View.Register
                         }
                         else
                         {
+                            lblStatusLabel.BackColor = Color.LightGreen;
                             int remainingCont = REGISTER_FINGER_COUNT - RegisterCount;
                             lblFingerPrintCount.Text = remainingCont.ToString();
                             string message = "Please provide your fingerprint " + remainingCont + " more time(s)";
@@ -421,20 +427,18 @@ namespace project_practice_3.MVC_View.Register
         // Handles the disconnection process from the fingerprint device, stopping any ongoing capture.
         private void BtnDisconnect_Click(object sender, EventArgs e)
         {
-            int result = fpInstance.CloseDevice();  // Close the connection
             bIsTimeToDie = true;
             RegisterCount = 0;
+              
+            
+            DisconnectFingerPrintCounter();
+            // Close the connection
+            int result = fpInstance.CloseDevice();
+            Thread.Sleep(1000);
 
-            if (captureThread == null || !captureThread.IsAlive)
-            {
-                // Show "connect to the device"
-                MessageBox.Show("Connect to the device.");
-            }
-            else
-            {
-                // If captureThread is running, abort it
-                captureThread.Abort();
-            }
+            captureThread.Abort();
+
+
 
             if (result == zkfp.ZKFP_ERR_OK)
             {
@@ -443,6 +447,9 @@ namespace project_practice_3.MVC_View.Register
                 {
                     // Reset any variables and data if necessary
                     ClearImage();
+                    regTempLen = 0;
+                    IsRegister = false;
+
 
                     btnDisconnect.Enabled = false;
                     btnConnect.Enabled = true;
@@ -452,14 +459,35 @@ namespace project_practice_3.MVC_View.Register
                     lblStatusLabel.Visible = false;
 
                     gbxFingerPrintStatus.Enabled = false;
-                    gbxPatientFP.Enabled = false;
+                    tclFingerPrintControl.Enabled = false;
                     gpxGeneratedPID.Enabled = false;
                     btnStartReg.Enabled = false;
+                    btnPID.Text = "PID";
 
-                    //tbcPatientInfo.Visible = false;
-                    //toolStripStatusLabel1.Text = "Please click the 'CONNECT' button to connect the device.";
-                    //toolStripStatusLabel1.BackColor = Color.FromArgb(230, 112, 134);
-                }
+                    // All the data from dictionary memory 
+                    if (fingerprintTemplates.Count > 0)
+                    {
+                        fingerprintTemplates.Clear();
+                    }
+
+                    // Clear Fingers Button Colors "yellow" 
+                    
+                    btnRT.BackColor = Color.Transparent;                  
+                    btnRI.BackColor = Color.Transparent;
+                    btnRM.BackColor = Color.Transparent;
+                    btnRR.BackColor = Color.Transparent;
+                    btnRP.BackColor = Color.Transparent;
+                    btnLT.BackColor = Color.Transparent;
+                    btnLI.BackColor = Color.Transparent;
+                    btnLM.BackColor = Color.Transparent;
+                    btnLR.BackColor = Color.Transparent;
+                    btnLP.BackColor = Color.Transparent;
+                        
+
+                        //tbcPatientInfo.Visible = false;
+                        //toolStripStatusLabel1.Text = "Please click the 'CONNECT' button to connect the device.";
+                        //toolStripStatusLabel1.BackColor = Color.FromArgb(230, 112, 134);
+                    }
             }
         }
 
@@ -651,8 +679,196 @@ namespace project_practice_3.MVC_View.Register
 
         private void BtnStartReg_Click(object sender, EventArgs e)
         {
-            gbxFingers.Enabled = true;
+            btnPID.Text = GeneratePatientId();
+            generatedPID = GeneratePatientId();
+            tclFingerPrintControl.Enabled = true;
             gbxFingerPrintStatus.Enabled = true;
+            
+
+
+            }
+
+        private void BtnPID_Click(object sender, EventArgs e)
+        {
+            // Check if registration with finger-prints or not. 
+            if (fingerprintTemplates.Count == 0)
+            {
+                PatientFormDetail PFD = new PatientFormDetail(generatedPID);
+                var res = MessageBox.Show("No fingerprints have been registered. Do you want to proceed without registering fingerprints?", "Warning", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                {
+                    // Save the PID into Patients data into the database 
+                    using (var context = new DatabaseConnection())
+                    {
+                        // Create a new Patient record
+                        var newPatient = new Patient
+                        {
+                            PID = generatedPID, // Replace with actual PID generation logic
+
+                        };
+
+                        context.Patients.Add(newPatient);
+                        context.SaveChanges();
+                    }
+
+                    MessageBox.Show("Patient ID is successfully saved into database.", "Successfully", MessageBoxButtons.OK);
+
+
+                    // Clear temporary storage of the fingerprints and reset the buttons. 
+
+
+                    PFD.ShowDialog();
+                    tclFingerPrintControl.Enabled = false;
+                    gbxFingerPrintStatus.Enabled = false;
+                    btnPID.Text = "PID";
+                }
+            } else
+            {
+               try
+                {
+                    // Save the PID and Finger-Prints into the database 
+                    using (var context = new DatabaseConnection())
+                    {
+                        // Create a new Patient record
+                        var newPatient = new Patient
+                        {
+                            PID = generatedPID, // Replace with actual PID generation logic
+
+                        };
+
+                        context.Patients.Add(newPatient);
+                        context.SaveChanges();
+                    }
+
+                    // Save fingerPrint
+                    using (var context = new DatabaseConnection())
+                    {
+                        // Retrieve the maximum existing Id from the Finger_Print_Data table
+                        int maxId = context.Finger_Print_Data.Max(f => (int?)f.Id) ?? 0;
+
+
+                        foreach (var entry in fingerprintTemplates)
+                        {
+                            maxId++;  // Increment Id for each new record
+                            var fingerPrintData = new FP_Data
+                            {
+                                Id = maxId,  // Generate a unique Id
+                                PID = generatedPID,           // Patient ID
+                                FingerName = entry.Key,       // Assuming FingerName refers to finger ID like "R1", "R2"
+                                FingerPrintID = entry.Value,  // Storing the template as FingerPrintID
+                                                              // Add a comment if necessary
+                            };
+
+                            context.Finger_Print_Data.Add(fingerPrintData);
+                        }
+
+                        context.SaveChanges();  // Save all changes to the database
+                    }
+
+                    MessageBox.Show("Patient ID and FingerPrints are successfully saved into database.", "Successfully", MessageBoxButtons.OK);
+                    
+                    // Clear temporary storage of the fingerprints and reset the buttons. 
+                    PatientFormDetail PFD = new PatientFormDetail(generatedPID);
+                    PFD.ShowDialog();
+                    tclFingerPrintControl.Enabled = false;
+                    gbxFingerPrintStatus.Enabled = false;
+                    btnPID.Text = "PID";
+
+                }
+                catch (DbUpdateException dbEx)
+                {
+
+                    // Log detailed error information
+                    var innerException = dbEx.InnerException?.Message;
+                    var fullError = dbEx.ToString();
+                    MessageBox.Show($"An error occurred while updating the database. Details: {innerException}\n{fullError}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                }
+                catch (SqlException sqlEx)
+                {
+                    // Handle SQL-specific errors
+                    MessageBox.Show($"SQL error: {sqlEx.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    // Handle all other exceptions
+                    MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+
+
+                
+            }
+            
+        }
+
+        
+
+
+        public string GeneratePatientId()
+        {
+            // Define the number of digits for the numeric part
+            const int numericPartLength = 5;
+
+            // Get the highest Patient ID from the database
+            var highestPatientId = _context.Patients
+                .OrderByDescending(p => p.PID)
+                .Select(p => p.PID)
+                .FirstOrDefault();
+
+            // If no Patient ID is found, return the default ID "A00001"
+            if (string.IsNullOrEmpty(highestPatientId))
+            {
+                return "A00001";
+            }
+
+            // Initialize new ID components
+            char newAlphabetPart = 'A';
+            int newNumericPart = 1;
+
+            if (!string.IsNullOrEmpty(highestPatientId))
+            {
+                // Extract the alphabet and numeric parts
+                char highestAlphabetPart = highestPatientId[0];
+                string highestNumericPart = highestPatientId.Substring(1);
+
+                // Increment the numeric part
+                if (int.TryParse(highestNumericPart, out int currentMaxNumericPart))
+                {
+                    newNumericPart = currentMaxNumericPart + 1;
+
+                    // Check if numeric part has overflowed
+                    if (newNumericPart > (int)Math.Pow(10, numericPartLength))
+                    {
+                        newNumericPart = 1;
+
+                        // Increment the alphabet part
+                        if (highestAlphabetPart < 'Z')
+                        {
+                            newAlphabetPart = (char)(highestAlphabetPart + 1);
+                        }
+                        else
+                        {
+                            // If the alphabet part has reached 'Z', wrap around to 'A'
+                            newAlphabetPart = 'A';
+                        }
+                    }
+                    else
+                    {
+                        newAlphabetPart = highestAlphabetPart;
+                    }
+                }
+            }
+
+            // Format the new numeric part with leading zeros
+            string formattedNumericPart = newNumericPart.ToString("D" + numericPartLength);
+
+            // Combine the alphabet and numeric parts
+            string newPatientId = $"{newAlphabetPart}{formattedNumericPart}";
+
+            return newPatientId;
         }
     }
 }

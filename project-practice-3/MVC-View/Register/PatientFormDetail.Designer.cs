@@ -160,6 +160,7 @@
             this.tbxIDcard.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxIDcard.Location = new System.Drawing.Point(120, 30);
             this.tbxIDcard.Name = "tbxIDcard";
+            this.tbxIDcard.ReadOnly = true;
             this.tbxIDcard.Size = new System.Drawing.Size(157, 25);
             this.tbxIDcard.TabIndex = 20;
             // 
@@ -519,9 +520,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(580, 450);
             this.Controls.Add(this.gpxPatientDetails);
             this.Name = "PatientFormDetail";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PatientFormDetail";
             this.gpxPatientDetails.ResumeLayout(false);
             this.tclPatientFormControl.ResumeLayout(false);

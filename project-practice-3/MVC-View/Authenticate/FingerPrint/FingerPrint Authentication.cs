@@ -13,7 +13,7 @@ namespace project_practice_3.MVC_View.Authenticate.FingerPrint
 {
     public partial class FingerPrint_Authentication : Form
     {
-        FingerPrintDeviceController controller;
+        
 
         public FingerPrint_Authentication()
         {
