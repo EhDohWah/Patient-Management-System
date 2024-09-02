@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using project_practice_3.MVC_View.Ipd;
 using project_practice_3.MVC_View.Opd;
 using project_practice_3.MVC_View.Authenticate;
+using project_practice_3.MVC_View.Authenticate.FingerPrint;
 
 namespace project_practice_3
 {
@@ -33,7 +34,7 @@ namespace project_practice_3
             switch (launchCount)
             {
                 case 0:
-                    formToOpen = new RegisterForm();
+                    formToOpen = new FingerPrint_Authentication();
                     break;
                 //case 1:
                 //    formToOpen = new PatientOPDForm();

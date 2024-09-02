@@ -60,7 +60,11 @@ namespace project_practice_3.MVC_View.Register
         public static string fingerID;
         public static string generatedPID;
 
+        public static byte[] dbString = new byte[2048];
+
         DatabaseConnection _context = new DatabaseConnection();
+
+        public static string fingerName;
 
         #endregion
 
@@ -139,7 +143,7 @@ namespace project_practice_3.MVC_View.Register
                 captureThread.Start();
 
                 btnStartReg.Enabled = true;
-                gpxGeneratedPID.Enabled = true;
+                
                 
                 // Connected Successfully
                 MessageBox.Show("Fingerprint Device Connected Successfully!", "Device Connection Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -193,6 +197,118 @@ namespace project_practice_3.MVC_View.Register
         [DllImport("user32.dll", EntryPoint = "SendMessageA")]
         public static extern int SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
 
+        // Fingerprint Duplication Check.
+        private async Task MatchFingerprintAsync()
+        {
+            try
+            {
+                using (var context = new DatabaseConnection()) // Replace with your actual DbContext class
+                {
+                    // Fetch all fingerprints along with associated patient information
+                    var fingerprints = await context.Finger_Print_Data
+                        .Include(fp => fp.Patient) // Ensure navigation property is set up
+                        .ToListAsync();
+
+                    foreach (var fingerprint in fingerprints)
+                    {
+                        // Convert the stored Base64 fingerprint string to byte array
+                        byte[] dbBlob = zkfp.Base64String2Blob(fingerprint.FingerPrintID);
+                        fpInstance.AddRegTemplate(1, dbBlob); // '1' is a temporary template ID
+
+                        // Perform the fingerprint matching
+                        int ret = fpInstance.Match(CapTmp, dbBlob);
+
+                        if (ret > 0)
+                        {
+                            // Match found; retrieve the associated PID and Patient details
+                            string matchedPID = fingerprint.PID;
+                            string patientName = fingerprint.Patient?.FullName ?? "Unknown";
+
+                            // Construct the message
+                            string message = $"The fingerprint is already registered to PID: {matchedPID}.\n" +
+                                             $"Patient Name: {patientName}.\n" +
+                                             "Please use another finger or proceed to identification.";
+                            
+
+
+                            // Display the message box on the UI thread
+                            // Assuming this method is called from a non-UI thread, use Invoke if necessary
+                            if (InvokeRequired)
+                            {
+                                this.Invoke(new Action(() =>
+                                {
+                                    MessageBox.Show(message,
+                                                    "Fingerprint Duplication",
+                                                    MessageBoxButtons.OK,
+                                                    MessageBoxIcon.Warning);
+                                }));
+                            }
+                            else
+                            {
+                                MessageBox.Show(message,
+                                                "Fingerprint Duplication",
+                                                MessageBoxButtons.OK,
+                                                MessageBoxIcon.Warning);
+                            }
+
+                            // Execute additional code after the user clicks OK or closes the message box
+                            fpInstance.DelRegTemplate(1);
+                            ResetUI();// Remove the temporary template
+                            StopRegistrationProcess();
+
+                            IsRegister = false;
+
+                            return;
+                        }
+                        else
+                        {
+                            // No match found for this fingerprint, clean up the template
+                            fpInstance.DelRegTemplate(1); // Remove the temporary template
+                            continue;
+                        }
+                    }
+
+                   
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately
+                if (InvokeRequired)
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        MessageBox.Show($"An error occurred: {ex.Message}",
+                                        "Error",
+                                        MessageBoxButtons.OK,
+                                        MessageBoxIcon.Error);
+                    }));
+                }
+                else
+                {
+                    MessageBox.Show($"An error occurred: {ex.Message}",
+                                    "Error",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void StopRegistrationProcess()
+        {
+            IsRegister = false;
+        }
+
+        //reset UI
+        private void ResetUI()
+        {
+            lblStatusLabel.Visible = false;
+            lblFingerPrintCount.Visible = false;
+
+            ClearImage();
+            ClearDeviceUser();
+            DisconnectFingerPrintCounter();
+        }
 
         // Starts the fingerprint registration process, prompting the user to press their finger multiple times.
         private void btnCaptuerFP_Click(object sender, EventArgs e)
@@ -206,7 +322,42 @@ namespace project_practice_3.MVC_View.Register
                 regTempLen = 0;
                 lblFingerPrintCount.Visible = true;
                 lblStatusLabel.Visible = true;
-                lblStatusLabel.Text = "Please press your finger " + REGISTER_FINGER_COUNT + " times to register";
+
+                if (fingerID == "RT")
+                {
+                    fingerName = "Right Thumb";
+                } else if (fingerID == "RI")
+                {
+                    fingerName = "Right Index";
+                } else if (fingerID == "RM")
+                {
+                    fingerName = "Right Middle";
+                } else if (fingerID == "RR")
+                {
+                    fingerName = "Right Ring";
+                } else if (fingerID == "RP")
+                {
+                    fingerName = "Right Pinky";
+                } else if (fingerID == "LT")
+                {
+                    fingerName = "Left Thumb";
+                } else if (fingerID == "LI")
+                {
+                    fingerName = "Left Index";
+                } else if ( fingerID == "LM")
+                {
+                    fingerName = "Left Middle";
+                } else if (fingerID == "LR")
+                {
+                    fingerName = "Left Ring"; 
+                } else
+                {
+                    fingerName = "Left Pinky";
+                }
+
+
+                lblStatusLabel.Text = $"Please press {fingerName} finger {REGISTER_FINGER_COUNT} times to register.";
+
                 lblStatusLabel.BackColor = Color.LightGreen;
                 lblFingerPrintCount.Visible = true;
                 lblFingerPrintCount.Text = REGISTER_FINGER_COUNT.ToString();
@@ -222,9 +373,12 @@ namespace project_practice_3.MVC_View.Register
                     // All your registration and verification code needs to be handled here
 
                     DisplayFingerPrintImage();
+                    
 
                     if (IsRegister)
                     {
+                        MatchFingerprintAsync();
+
                         // Code to be executed in case of registration
                         #region -------- IF REGISTERED FINGERPRINT --------
 
@@ -325,7 +479,7 @@ namespace project_practice_3.MVC_View.Register
                             lblStatusLabel.BackColor = Color.LightGreen;
                             int remainingCont = REGISTER_FINGER_COUNT - RegisterCount;
                             lblFingerPrintCount.Text = remainingCont.ToString();
-                            string message = "Please provide your fingerprint " + remainingCont + " more time(s)";
+                            string message = "Please provide fingerprint " + remainingCont + " more time(s)";
 
                             lblStatusLabel.Text = message;
 
@@ -563,7 +717,6 @@ namespace project_practice_3.MVC_View.Register
 
         }
 
-
         private void BtnRM_Click(object sender, EventArgs e)
         {
             // Set the finger ID for the upcoming registration
@@ -681,12 +834,13 @@ namespace project_practice_3.MVC_View.Register
         {
             btnPID.Text = GeneratePatientId();
             generatedPID = GeneratePatientId();
+            gpxGeneratedPID.Enabled = true;
             tclFingerPrintControl.Enabled = true;
             gbxFingerPrintStatus.Enabled = true;
             
 
 
-            }
+        }
 
         private void BtnPID_Click(object sender, EventArgs e)
         {
@@ -765,6 +919,27 @@ namespace project_practice_3.MVC_View.Register
                         context.SaveChanges();  // Save all changes to the database
                     }
 
+
+                    // All the data from dictionary memory 
+                    if (fingerprintTemplates.Count > 0)
+                    {
+                        fingerprintTemplates.Clear();
+                    }
+
+                    // Clear Fingers Button Colors "yellow" 
+
+                    btnRT.BackColor = Color.Transparent;
+                    btnRI.BackColor = Color.Transparent;
+                    btnRM.BackColor = Color.Transparent;
+                    btnRR.BackColor = Color.Transparent;
+                    btnRP.BackColor = Color.Transparent;
+                    btnLT.BackColor = Color.Transparent;
+                    btnLI.BackColor = Color.Transparent;
+                    btnLM.BackColor = Color.Transparent;
+                    btnLR.BackColor = Color.Transparent;
+                    btnLP.BackColor = Color.Transparent;
+
+
                     MessageBox.Show("Patient ID and FingerPrints are successfully saved into database.", "Successfully", MessageBoxButtons.OK);
                     
                     // Clear temporary storage of the fingerprints and reset the buttons. 
@@ -796,17 +971,12 @@ namespace project_practice_3.MVC_View.Register
                     MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-
-
-
-                
             }
             
         }
 
-        
 
-
+        // Generate a Patient ID (PID) in sequential order by checking the latest existing PID in the database.
         public string GeneratePatientId()
         {
             // Define the number of digits for the numeric part

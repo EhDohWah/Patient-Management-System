@@ -91,7 +91,7 @@
             this.btnIDcard.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnIDcard.Location = new System.Drawing.Point(13, 12);
             this.btnIDcard.Name = "btnIDcard";
-            this.btnIDcard.Size = new System.Drawing.Size(975, 581);
+            this.btnIDcard.Size = new System.Drawing.Size(988, 562);
             this.btnIDcard.TabIndex = 14;
             this.btnIDcard.TabStop = false;
             this.btnIDcard.Text = "Device";
@@ -255,7 +255,7 @@
             this.tabPageRegister.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPageRegister.Location = new System.Drawing.Point(4, 24);
             this.tabPageRegister.Name = "tabPageRegister";
-            this.tabPageRegister.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPageRegister.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageRegister.Size = new System.Drawing.Size(526, 324);
             this.tabPageRegister.TabIndex = 0;
             this.tabPageRegister.Text = "Register";
@@ -310,7 +310,7 @@
             // btnLP
             // 
             this.btnLP.Location = new System.Drawing.Point(10, 107);
-            this.btnLP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLP.Margin = new System.Windows.Forms.Padding(2);
             this.btnLP.Name = "btnLP";
             this.btnLP.Size = new System.Drawing.Size(33, 23);
             this.btnLP.TabIndex = 4;
@@ -322,7 +322,7 @@
             // btnRP
             // 
             this.btnRP.Location = new System.Drawing.Point(474, 108);
-            this.btnRP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRP.Margin = new System.Windows.Forms.Padding(2);
             this.btnRP.Name = "btnRP";
             this.btnRP.Size = new System.Drawing.Size(33, 23);
             this.btnRP.TabIndex = 4;
@@ -334,7 +334,7 @@
             // btnLR
             // 
             this.btnLR.Location = new System.Drawing.Point(33, 54);
-            this.btnLR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLR.Margin = new System.Windows.Forms.Padding(2);
             this.btnLR.Name = "btnLR";
             this.btnLR.Size = new System.Drawing.Size(33, 23);
             this.btnLR.TabIndex = 4;
@@ -346,7 +346,7 @@
             // btnRR
             // 
             this.btnRR.Location = new System.Drawing.Point(446, 54);
-            this.btnRR.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRR.Margin = new System.Windows.Forms.Padding(2);
             this.btnRR.Name = "btnRR";
             this.btnRR.Size = new System.Drawing.Size(33, 23);
             this.btnRR.TabIndex = 4;
@@ -358,7 +358,7 @@
             // btnLM
             // 
             this.btnLM.Location = new System.Drawing.Point(64, 30);
-            this.btnLM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLM.Margin = new System.Windows.Forms.Padding(2);
             this.btnLM.Name = "btnLM";
             this.btnLM.Size = new System.Drawing.Size(33, 23);
             this.btnLM.TabIndex = 4;
@@ -370,7 +370,7 @@
             // btnRM
             // 
             this.btnRM.Location = new System.Drawing.Point(408, 30);
-            this.btnRM.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRM.Margin = new System.Windows.Forms.Padding(2);
             this.btnRM.Name = "btnRM";
             this.btnRM.Size = new System.Drawing.Size(33, 23);
             this.btnRM.TabIndex = 4;
@@ -382,7 +382,7 @@
             // btnLI
             // 
             this.btnLI.Location = new System.Drawing.Point(130, 30);
-            this.btnLI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLI.Margin = new System.Windows.Forms.Padding(2);
             this.btnLI.Name = "btnLI";
             this.btnLI.Size = new System.Drawing.Size(33, 23);
             this.btnLI.TabIndex = 4;
@@ -394,7 +394,7 @@
             // btnRI
             // 
             this.btnRI.Location = new System.Drawing.Point(356, 35);
-            this.btnRI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRI.Margin = new System.Windows.Forms.Padding(2);
             this.btnRI.Name = "btnRI";
             this.btnRI.Size = new System.Drawing.Size(33, 23);
             this.btnRI.TabIndex = 4;
@@ -406,7 +406,7 @@
             // btnLT
             // 
             this.btnLT.Location = new System.Drawing.Point(215, 140);
-            this.btnLT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnLT.Margin = new System.Windows.Forms.Padding(2);
             this.btnLT.Name = "btnLT";
             this.btnLT.Size = new System.Drawing.Size(33, 23);
             this.btnLT.TabIndex = 4;
@@ -418,7 +418,7 @@
             // btnRT
             // 
             this.btnRT.Location = new System.Drawing.Point(271, 140);
-            this.btnRT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnRT.Margin = new System.Windows.Forms.Padding(2);
             this.btnRT.Name = "btnRT";
             this.btnRT.Size = new System.Drawing.Size(33, 23);
             this.btnRT.TabIndex = 4;
@@ -432,7 +432,7 @@
             this.pictureBox1.BackgroundImage = global::project_practice_3.Properties.Resources.right_hand;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(261, 21);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 280);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -455,7 +455,7 @@
             this.gbxFingerPrintStatus.Controls.Add(this.lblFingerPrintCount);
             this.gbxFingerPrintStatus.Location = new System.Drawing.Point(558, 192);
             this.gbxFingerPrintStatus.Name = "gbxFingerPrintStatus";
-            this.gbxFingerPrintStatus.Size = new System.Drawing.Size(404, 367);
+            this.gbxFingerPrintStatus.Size = new System.Drawing.Size(413, 367);
             this.gbxFingerPrintStatus.TabIndex = 22;
             this.gbxFingerPrintStatus.TabStop = false;
             this.gbxFingerPrintStatus.Text = "Finger-Print Status";
@@ -463,10 +463,10 @@
             // lblStatusLabel
             // 
             this.lblStatusLabel.AutoSize = true;
-            this.lblStatusLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatusLabel.Location = new System.Drawing.Point(20, 323);
             this.lblStatusLabel.Name = "lblStatusLabel";
-            this.lblStatusLabel.Size = new System.Drawing.Size(25, 21);
+            this.lblStatusLabel.Size = new System.Drawing.Size(24, 20);
             this.lblStatusLabel.TabIndex = 21;
             this.lblStatusLabel.Text = ".....";
             // 
@@ -486,7 +486,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(995, 586);
+            this.ClientSize = new System.Drawing.Size(1006, 586);
             this.Controls.Add(this.btnIDcard);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RegisterForm";

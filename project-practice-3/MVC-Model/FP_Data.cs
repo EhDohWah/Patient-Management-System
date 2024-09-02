@@ -25,5 +25,9 @@ namespace project_practice_3.MVC_Model
 
         public string Comment { get; set; }
 
+
+        [ForeignKey("PID")]
+        public Patient Patient { get; set; } // Establishes a relationship with the Patient entity
+
     }
 }

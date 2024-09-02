@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.gbxDevice = new System.Windows.Forms.GroupBox();
-            this.gbxTitle = new System.Windows.Forms.GroupBox();
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.picFPImg = new System.Windows.Forms.PictureBox();
+            this.gbxAuthPID = new System.Windows.Forms.GroupBox();
             this.gbxConnectionStatus = new System.Windows.Forms.GroupBox();
             this.lblConnectionStatus = new System.Windows.Forms.Label();
             this.gbxConnection = new System.Windows.Forms.GroupBox();
@@ -54,6 +54,8 @@
             this.btnRI = new System.Windows.Forms.Button();
             this.btnLT = new System.Windows.Forms.Button();
             this.btnRT = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPageVerify = new System.Windows.Forms.TabPage();
             this.gbxFingerPrint = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -68,36 +70,34 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbxRightFinger = new System.Windows.Forms.PictureBox();
             this.pbxLeftFinger = new System.Windows.Forms.PictureBox();
-            this.picFPImg = new System.Windows.Forms.PictureBox();
-            this.btnIDCardNo = new System.Windows.Forms.Button();
-            this.lblStatusLabel = new System.Windows.Forms.Label();
+            this.tbxCiteCode = new System.Windows.Forms.TextBox();
+            this.lblPIDSearch = new System.Windows.Forms.Label();
+            this.gbxAuthFingerPrint = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.gbxDevice.SuspendLayout();
-            this.gbxTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).BeginInit();
+            this.gbxAuthPID.SuspendLayout();
             this.gbxConnectionStatus.SuspendLayout();
             this.gbxConnection.SuspendLayout();
             this.gbxPatientFP.SuspendLayout();
             this.tclFingerPrintControl.SuspendLayout();
             this.tabPageRegister.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPageVerify.SuspendLayout();
-            this.gbxFingerPrint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.tabPageVerify.SuspendLayout();
+            this.gbxFingerPrint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRightFinger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLeftFinger)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).BeginInit();
+            this.gbxAuthFingerPrint.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbxDevice
             // 
-            this.gbxDevice.Controls.Add(this.picFPImg);
-            this.gbxDevice.Controls.Add(this.btnIDCardNo);
-            this.gbxDevice.Controls.Add(this.lblStatusLabel);
-            this.gbxDevice.Controls.Add(this.gbxTitle);
+            this.gbxDevice.Controls.Add(this.gbxAuthFingerPrint);
+            this.gbxDevice.Controls.Add(this.gbxAuthPID);
             this.gbxDevice.Controls.Add(this.gbxConnectionStatus);
             this.gbxDevice.Controls.Add(this.gbxConnection);
             this.gbxDevice.Controls.Add(this.lblDeviceName);
@@ -106,30 +106,33 @@
             this.gbxDevice.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbxDevice.Location = new System.Drawing.Point(12, 12);
             this.gbxDevice.Name = "gbxDevice";
-            this.gbxDevice.Size = new System.Drawing.Size(910, 581);
+            this.gbxDevice.Size = new System.Drawing.Size(910, 570);
             this.gbxDevice.TabIndex = 13;
             this.gbxDevice.TabStop = false;
             this.gbxDevice.Text = "Device";
             // 
-            // gbxTitle
+            // picFPImg
             // 
-            this.gbxTitle.Controls.Add(this.lblTitle);
-            this.gbxTitle.Location = new System.Drawing.Point(558, 15);
-            this.gbxTitle.Name = "gbxTitle";
-            this.gbxTitle.Size = new System.Drawing.Size(319, 124);
-            this.gbxTitle.TabIndex = 20;
-            this.gbxTitle.TabStop = false;
-            this.gbxTitle.Text = "Title";
+            this.picFPImg.BackColor = System.Drawing.Color.Transparent;
+            this.picFPImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picFPImg.Location = new System.Drawing.Point(49, 59);
+            this.picFPImg.Name = "picFPImg";
+            this.picFPImg.Size = new System.Drawing.Size(230, 262);
+            this.picFPImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picFPImg.TabIndex = 23;
+            this.picFPImg.TabStop = false;
             // 
-            // lblTitle
+            // gbxAuthPID
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(77, 45);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(184, 32);
-            this.lblTitle.TabIndex = 19;
-            this.lblTitle.Text = "Authentication";
+            this.gbxAuthPID.Controls.Add(this.btnSearch);
+            this.gbxAuthPID.Controls.Add(this.tbxCiteCode);
+            this.gbxAuthPID.Controls.Add(this.lblPIDSearch);
+            this.gbxAuthPID.Location = new System.Drawing.Point(558, 15);
+            this.gbxAuthPID.Name = "gbxAuthPID";
+            this.gbxAuthPID.Size = new System.Drawing.Size(330, 159);
+            this.gbxAuthPID.TabIndex = 20;
+            this.gbxAuthPID.TabStop = false;
+            this.gbxAuthPID.Text = "PID Search";
             // 
             // gbxConnectionStatus
             // 
@@ -197,6 +200,7 @@
             // 
             // tbxDeviceInfo
             // 
+            this.tbxDeviceInfo.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbxDeviceInfo.Location = new System.Drawing.Point(86, 25);
             this.tbxDeviceInfo.Multiline = true;
             this.tbxDeviceInfo.Name = "tbxDeviceInfo";
@@ -207,7 +211,7 @@
             // gbxPatientFP
             // 
             this.gbxPatientFP.Controls.Add(this.tclFingerPrintControl);
-            this.gbxPatientFP.Location = new System.Drawing.Point(6, 192);
+            this.gbxPatientFP.Location = new System.Drawing.Point(0, 180);
             this.gbxPatientFP.Name = "gbxPatientFP";
             this.gbxPatientFP.Size = new System.Drawing.Size(546, 380);
             this.gbxPatientFP.TabIndex = 18;
@@ -392,6 +396,28 @@
             this.btnRT.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btnRT.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::project_practice_3.Properties.Resources.right_hand;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(261, 21);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(250, 280);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::project_practice_3.Properties.Resources.left_hand;
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(6, 21);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(250, 280);
+            this.pictureBox2.TabIndex = 5;
+            this.pictureBox2.TabStop = false;
+            // 
             // tabPageVerify
             // 
             this.tabPageVerify.Controls.Add(this.gbxFingerPrint);
@@ -560,28 +586,6 @@
             this.button10.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.button10.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::project_practice_3.Properties.Resources.right_hand;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(261, 21);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 280);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::project_practice_3.Properties.Resources.left_hand;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(6, 21);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(250, 280);
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            // 
             // pbxRightFinger
             // 
             this.pbxRightFinger.BackgroundImage = global::project_practice_3.Properties.Resources.right_hand;
@@ -604,48 +608,56 @@
             this.pbxLeftFinger.TabIndex = 5;
             this.pbxLeftFinger.TabStop = false;
             // 
-            // picFPImg
+            // tbxCiteCode
             // 
-            this.picFPImg.BackColor = System.Drawing.Color.Transparent;
-            this.picFPImg.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picFPImg.Location = new System.Drawing.Point(562, 202);
-            this.picFPImg.Name = "picFPImg";
-            this.picFPImg.Size = new System.Drawing.Size(230, 262);
-            this.picFPImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picFPImg.TabIndex = 23;
-            this.picFPImg.TabStop = false;
+            this.tbxCiteCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxCiteCode.Location = new System.Drawing.Point(18, 61);
+            this.tbxCiteCode.Name = "tbxCiteCode";
+            this.tbxCiteCode.Size = new System.Drawing.Size(294, 25);
+            this.tbxCiteCode.TabIndex = 38;
             // 
-            // btnIDCardNo
+            // lblPIDSearch
             // 
-            this.btnIDCardNo.Location = new System.Drawing.Point(562, 157);
-            this.btnIDCardNo.Name = "btnIDCardNo";
-            this.btnIDCardNo.Size = new System.Drawing.Size(230, 39);
-            this.btnIDCardNo.TabIndex = 26;
-            this.btnIDCardNo.Text = "PID";
-            this.btnIDCardNo.UseVisualStyleBackColor = true;
+            this.lblPIDSearch.AutoSize = true;
+            this.lblPIDSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPIDSearch.Location = new System.Drawing.Point(14, 34);
+            this.lblPIDSearch.Name = "lblPIDSearch";
+            this.lblPIDSearch.Size = new System.Drawing.Size(89, 15);
+            this.lblPIDSearch.TabIndex = 39;
+            this.lblPIDSearch.Text = "Enter PID Here";
             // 
-            // lblStatusLabel
+            // gbxAuthFingerPrint
             // 
-            this.lblStatusLabel.AutoSize = true;
-            this.lblStatusLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatusLabel.Location = new System.Drawing.Point(599, 505);
-            this.lblStatusLabel.Name = "lblStatusLabel";
-            this.lblStatusLabel.Size = new System.Drawing.Size(25, 21);
-            this.lblStatusLabel.TabIndex = 25;
-            this.lblStatusLabel.Text = ".....";
+            this.gbxAuthFingerPrint.Controls.Add(this.picFPImg);
+            this.gbxAuthFingerPrint.Location = new System.Drawing.Point(560, 180);
+            this.gbxAuthFingerPrint.Name = "gbxAuthFingerPrint";
+            this.gbxAuthFingerPrint.Size = new System.Drawing.Size(328, 380);
+            this.gbxAuthFingerPrint.TabIndex = 0;
+            this.gbxAuthFingerPrint.TabStop = false;
+            this.gbxAuthFingerPrint.Text = "Finger-Print Image";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(237, 103);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 30);
+            this.btnSearch.TabIndex = 40;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // FingerPrint_Authentication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 586);
+            this.ClientSize = new System.Drawing.Size(939, 589);
             this.Controls.Add(this.gbxDevice);
             this.Name = "FingerPrint_Authentication";
             this.Text = "FingerPrint_Authentication";
             this.gbxDevice.ResumeLayout(false);
             this.gbxDevice.PerformLayout();
-            this.gbxTitle.ResumeLayout(false);
-            this.gbxTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).EndInit();
+            this.gbxAuthPID.ResumeLayout(false);
+            this.gbxAuthPID.PerformLayout();
             this.gbxConnectionStatus.ResumeLayout(false);
             this.gbxConnectionStatus.PerformLayout();
             this.gbxConnection.ResumeLayout(false);
@@ -654,14 +666,14 @@
             this.tabPageRegister.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPageVerify.ResumeLayout(false);
             this.gbxFingerPrint.ResumeLayout(false);
             this.gbxFingerPrint.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRightFinger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLeftFinger)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).EndInit();
+            this.gbxAuthFingerPrint.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -710,10 +722,11 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.PictureBox pbxRightFinger;
         private System.Windows.Forms.PictureBox pbxLeftFinger;
-        private System.Windows.Forms.GroupBox gbxTitle;
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.GroupBox gbxAuthPID;
         private System.Windows.Forms.PictureBox picFPImg;
-        private System.Windows.Forms.Button btnIDCardNo;
-        private System.Windows.Forms.Label lblStatusLabel;
+        private System.Windows.Forms.GroupBox gbxAuthFingerPrint;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox tbxCiteCode;
+        private System.Windows.Forms.Label lblPIDSearch;
     }
 }
