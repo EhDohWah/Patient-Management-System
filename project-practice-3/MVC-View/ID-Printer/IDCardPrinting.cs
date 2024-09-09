@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace project_practice_3.MVC_View.Authenticate
+namespace project_practice_3.MVC_View.ID_Printer
 {
-    public partial class Authentication : Form
+    public partial class IDCardPrinting : Form
     {
-        public Authentication()
+        public IDCardPrinting()
         {
             InitializeComponent();
         }

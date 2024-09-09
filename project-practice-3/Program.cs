@@ -8,6 +8,7 @@ using project_practice_3.MVC_View.Ipd;
 using project_practice_3.MVC_View.Opd;
 using project_practice_3.MVC_View.Authenticate;
 using project_practice_3.MVC_View.Authenticate.FingerPrint;
+using project_practice_3.MVC_View.Dashboard;
 
 namespace project_practice_3
 {
@@ -34,11 +35,11 @@ namespace project_practice_3
             switch (launchCount)
             {
                 case 0:
-                    formToOpen = new FingerPrint_Authentication();
+                    formToOpen = new Dashboard();
                     break;
-                //case 1:
-                //    formToOpen = new PatientOPDForm();
-                //    break;
+                case 1:
+                    formToOpen = new RegisterForm();
+                    break;
                 //case 2:
                 //    formToOpen = new PatientIPDForm();
                 //    break;
@@ -51,7 +52,7 @@ namespace project_practice_3
             }
 
             // Update the launch count for next time
-            Properties.Settings.Default.LaunchCount = (launchCount + 1) % 1;
+            Properties.Settings.Default.LaunchCount = (launchCount + 1) % 2;
             Properties.Settings.Default.Save();
 
             if (formToOpen != null)

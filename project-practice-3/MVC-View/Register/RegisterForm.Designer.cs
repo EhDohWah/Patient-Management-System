@@ -464,7 +464,7 @@
             // 
             this.lblStatusLabel.AutoSize = true;
             this.lblStatusLabel.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatusLabel.Location = new System.Drawing.Point(20, 323);
+            this.lblStatusLabel.Location = new System.Drawing.Point(20, 315);
             this.lblStatusLabel.Name = "lblStatusLabel";
             this.lblStatusLabel.Size = new System.Drawing.Size(24, 20);
             this.lblStatusLabel.TabIndex = 21;
@@ -489,9 +489,11 @@
             this.ClientSize = new System.Drawing.Size(1006, 586);
             this.Controls.Add(this.btnIDcard);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MinimizeBox = false;
             this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegisterForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterForm_FormClosing);
             this.btnIDcard.ResumeLayout(false);
             this.btnIDcard.PerformLayout();
             this.gpxGeneratedPID.ResumeLayout(false);

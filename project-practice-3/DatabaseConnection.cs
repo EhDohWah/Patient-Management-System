@@ -13,7 +13,16 @@ namespace project_practice_3
     {
         // Defined the model 
         public DbSet<Patient> Patients { get; set; }
+
         public DbSet<FP_Data> Finger_Print_Data { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
+
+        public DbSet<Patient_OPD_Model> Patient_OPD {  get; set; }
+
+        public DbSet<Patient_IPD_Model> Patient_IPD { get; set; }
+
+        public DbSet<Patient_Transfer_Model> Patient_Transfer { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -147,7 +147,7 @@
             this.Controls.Add(this.gbxRecordDetail);
             this.Name = "PatientRecordForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Patient Record";
+            this.Text = " n ";
             this.gbxRecordDetail.ResumeLayout(false);
             this.gbxRecordDetail.PerformLayout();
             this.gbxOpdFindings.ResumeLayout(false);

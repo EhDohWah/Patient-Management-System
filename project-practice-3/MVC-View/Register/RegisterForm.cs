@@ -455,7 +455,7 @@ namespace project_practice_3.MVC_View.Register
                                     RegisterFinger(fingerID, fingerPrintTemplate);  // Replace "R1" with the appropriate finger ID
 
                                     lblStatusLabel.BackColor = Color.LightGreen;
-                                    lblStatusLabel.Text = "Enroll Successfull";
+                                    lblStatusLabel.Text = "FingerPrint successfuly captured! \nPlease click the PID to proceed the details.";
 
                                     DisconnectFingerPrintCounter();
                                 } else
@@ -590,8 +590,10 @@ namespace project_practice_3.MVC_View.Register
             int result = fpInstance.CloseDevice();
             Thread.Sleep(1000);
 
-            captureThread.Abort();
-
+            if (captureThread != null && captureThread.IsAlive)
+            {
+                captureThread.Abort();
+            }
 
 
             if (result == zkfp.ZKFP_ERR_OK)
@@ -837,8 +839,7 @@ namespace project_practice_3.MVC_View.Register
             gpxGeneratedPID.Enabled = true;
             tclFingerPrintControl.Enabled = true;
             gbxFingerPrintStatus.Enabled = true;
-            
-
+            btnPID.Enabled = true;
 
         }
 
@@ -848,7 +849,7 @@ namespace project_practice_3.MVC_View.Register
             if (fingerprintTemplates.Count == 0)
             {
                 PatientFormDetail PFD = new PatientFormDetail(generatedPID);
-                var res = MessageBox.Show("No fingerprints have been registered. Do you want to proceed without registering fingerprints?", "Warning", MessageBoxButtons.YesNo);
+                var res = MessageBox.Show("No fingerprints have been registered. Do you want to proceed without registering fingerprints?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (res == DialogResult.Yes)
                 {
                     // Save the PID into Patients data into the database 
@@ -865,7 +866,7 @@ namespace project_practice_3.MVC_View.Register
                         context.SaveChanges();
                     }
 
-                    MessageBox.Show("Patient ID is successfully saved into database.", "Successfully", MessageBoxButtons.OK);
+                    MessageBox.Show("Patient ID is successfully saved into database.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                     // Clear temporary storage of the fingerprints and reset the buttons. 
@@ -875,6 +876,7 @@ namespace project_practice_3.MVC_View.Register
                     tclFingerPrintControl.Enabled = false;
                     gbxFingerPrintStatus.Enabled = false;
                     btnPID.Text = "PID";
+                    btnPID.Enabled = false;
                 }
             } else
             {
@@ -940,7 +942,7 @@ namespace project_practice_3.MVC_View.Register
                     btnLP.BackColor = Color.Transparent;
 
 
-                    MessageBox.Show("Patient ID and FingerPrints are successfully saved into database.", "Successfully", MessageBoxButtons.OK);
+                    MessageBox.Show("Patient ID and FingerPrints are successfully saved into database.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     // Clear temporary storage of the fingerprints and reset the buttons. 
                     PatientFormDetail PFD = new PatientFormDetail(generatedPID);
@@ -948,6 +950,7 @@ namespace project_practice_3.MVC_View.Register
                     tclFingerPrintControl.Enabled = false;
                     gbxFingerPrintStatus.Enabled = false;
                     btnPID.Text = "PID";
+                    btnPID.Enabled = false;
 
                 }
                 catch (DbUpdateException dbEx)
@@ -1039,6 +1042,11 @@ namespace project_practice_3.MVC_View.Register
             string newPatientId = $"{newAlphabetPart}{formattedNumericPart}";
 
             return newPatientId;
+        }
+
+        private void RegisterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BtnDisconnect_Click(sender, e);
         }
     }
 }

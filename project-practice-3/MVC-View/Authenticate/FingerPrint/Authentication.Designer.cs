@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbxDevice = new System.Windows.Forms.GroupBox();
+            this.gbxAuthFingerPrint = new System.Windows.Forms.GroupBox();
             this.picFPImg = new System.Windows.Forms.PictureBox();
             this.gbxAuthPID = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.tbxPIDSearch = new System.Windows.Forms.TextBox();
+            this.lblPIDSearch = new System.Windows.Forms.Label();
             this.gbxConnectionStatus = new System.Windows.Forms.GroupBox();
             this.lblConnectionStatus = new System.Windows.Forms.Label();
             this.gbxConnection = new System.Windows.Forms.GroupBox();
@@ -72,11 +77,9 @@
             this.button10 = new System.Windows.Forms.Button();
             this.pbxRightFinger = new System.Windows.Forms.PictureBox();
             this.pbxLeftFinger = new System.Windows.Forms.PictureBox();
-            this.tbxCiteCode = new System.Windows.Forms.TextBox();
-            this.lblPIDSearch = new System.Windows.Forms.Label();
-            this.gbxAuthFingerPrint = new System.Windows.Forms.GroupBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.gbxDevice.SuspendLayout();
+            this.gbxAuthFingerPrint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).BeginInit();
             this.gbxAuthPID.SuspendLayout();
             this.gbxConnectionStatus.SuspendLayout();
@@ -91,7 +94,7 @@
             this.gbxFingerPrint.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRightFinger)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLeftFinger)).BeginInit();
-            this.gbxAuthFingerPrint.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // gbxDevice
@@ -111,6 +114,16 @@
             this.gbxDevice.TabStop = false;
             this.gbxDevice.Text = "Device";
             // 
+            // gbxAuthFingerPrint
+            // 
+            this.gbxAuthFingerPrint.Controls.Add(this.picFPImg);
+            this.gbxAuthFingerPrint.Location = new System.Drawing.Point(560, 180);
+            this.gbxAuthFingerPrint.Name = "gbxAuthFingerPrint";
+            this.gbxAuthFingerPrint.Size = new System.Drawing.Size(328, 380);
+            this.gbxAuthFingerPrint.TabIndex = 0;
+            this.gbxAuthFingerPrint.TabStop = false;
+            this.gbxAuthFingerPrint.Text = "Finger-Print Image";
+            // 
             // picFPImg
             // 
             this.picFPImg.BackColor = System.Drawing.Color.Transparent;
@@ -125,7 +138,7 @@
             // gbxAuthPID
             // 
             this.gbxAuthPID.Controls.Add(this.btnSearch);
-            this.gbxAuthPID.Controls.Add(this.tbxCiteCode);
+            this.gbxAuthPID.Controls.Add(this.tbxPIDSearch);
             this.gbxAuthPID.Controls.Add(this.lblPIDSearch);
             this.gbxAuthPID.Location = new System.Drawing.Point(558, 15);
             this.gbxAuthPID.Name = "gbxAuthPID";
@@ -133,6 +146,34 @@
             this.gbxAuthPID.TabIndex = 20;
             this.gbxAuthPID.TabStop = false;
             this.gbxAuthPID.Text = "PID Search";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(237, 92);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 30);
+            this.btnSearch.TabIndex = 40;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
+            // 
+            // tbxPIDSearch
+            // 
+            this.tbxPIDSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbxPIDSearch.Location = new System.Drawing.Point(18, 61);
+            this.tbxPIDSearch.Name = "tbxPIDSearch";
+            this.tbxPIDSearch.Size = new System.Drawing.Size(294, 25);
+            this.tbxPIDSearch.TabIndex = 38;
+            // 
+            // lblPIDSearch
+            // 
+            this.lblPIDSearch.AutoSize = true;
+            this.lblPIDSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPIDSearch.Location = new System.Drawing.Point(14, 34);
+            this.lblPIDSearch.Name = "lblPIDSearch";
+            this.lblPIDSearch.Size = new System.Drawing.Size(89, 15);
+            this.lblPIDSearch.TabIndex = 39;
+            this.lblPIDSearch.Text = "Enter PID Here";
             // 
             // gbxConnectionStatus
             // 
@@ -176,6 +217,7 @@
             this.btnDisconnect.TabIndex = 14;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = false;
+            this.btnDisconnect.Click += new System.EventHandler(this.BtnDisconnect_Click);
             // 
             // btnConnect
             // 
@@ -213,7 +255,7 @@
             this.gbxPatientFP.Controls.Add(this.tclFingerPrintControl);
             this.gbxPatientFP.Location = new System.Drawing.Point(0, 180);
             this.gbxPatientFP.Name = "gbxPatientFP";
-            this.gbxPatientFP.Size = new System.Drawing.Size(546, 380);
+            this.gbxPatientFP.Size = new System.Drawing.Size(552, 380);
             this.gbxPatientFP.TabIndex = 18;
             this.gbxPatientFP.TabStop = false;
             this.gbxPatientFP.Text = "Finger-Prints";
@@ -608,42 +650,9 @@
             this.pbxLeftFinger.TabIndex = 5;
             this.pbxLeftFinger.TabStop = false;
             // 
-            // tbxCiteCode
+            // errorProvider
             // 
-            this.tbxCiteCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbxCiteCode.Location = new System.Drawing.Point(18, 61);
-            this.tbxCiteCode.Name = "tbxCiteCode";
-            this.tbxCiteCode.Size = new System.Drawing.Size(294, 25);
-            this.tbxCiteCode.TabIndex = 38;
-            // 
-            // lblPIDSearch
-            // 
-            this.lblPIDSearch.AutoSize = true;
-            this.lblPIDSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPIDSearch.Location = new System.Drawing.Point(14, 34);
-            this.lblPIDSearch.Name = "lblPIDSearch";
-            this.lblPIDSearch.Size = new System.Drawing.Size(89, 15);
-            this.lblPIDSearch.TabIndex = 39;
-            this.lblPIDSearch.Text = "Enter PID Here";
-            // 
-            // gbxAuthFingerPrint
-            // 
-            this.gbxAuthFingerPrint.Controls.Add(this.picFPImg);
-            this.gbxAuthFingerPrint.Location = new System.Drawing.Point(560, 180);
-            this.gbxAuthFingerPrint.Name = "gbxAuthFingerPrint";
-            this.gbxAuthFingerPrint.Size = new System.Drawing.Size(328, 380);
-            this.gbxAuthFingerPrint.TabIndex = 0;
-            this.gbxAuthFingerPrint.TabStop = false;
-            this.gbxAuthFingerPrint.Text = "Finger-Print Image";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(237, 103);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 30);
-            this.btnSearch.TabIndex = 40;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.errorProvider.ContainerControl = this;
             // 
             // FingerPrint_Authentication
             // 
@@ -651,10 +660,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 589);
             this.Controls.Add(this.gbxDevice);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FingerPrint_Authentication";
-            this.Text = "FingerPrint_Authentication";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Authentication";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FingerPrint_Authentication_FormClosing);
             this.gbxDevice.ResumeLayout(false);
             this.gbxDevice.PerformLayout();
+            this.gbxAuthFingerPrint.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picFPImg)).EndInit();
             this.gbxAuthPID.ResumeLayout(false);
             this.gbxAuthPID.PerformLayout();
@@ -673,7 +687,7 @@
             this.gbxFingerPrint.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbxRightFinger)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLeftFinger)).EndInit();
-            this.gbxAuthFingerPrint.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -726,7 +740,8 @@
         private System.Windows.Forms.PictureBox picFPImg;
         private System.Windows.Forms.GroupBox gbxAuthFingerPrint;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox tbxCiteCode;
+        private System.Windows.Forms.TextBox tbxPIDSearch;
         private System.Windows.Forms.Label lblPIDSearch;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

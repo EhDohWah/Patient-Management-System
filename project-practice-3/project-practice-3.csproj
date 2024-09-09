@@ -193,25 +193,47 @@
       <DependentUpon>Master.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-Controller\BitmapFormat.cs" />
+    <Compile Include="MVC-Model\Address.cs" />
     <Compile Include="MVC-Model\FP_Data.cs" />
     <Compile Include="MVC-Model\Patient.cs" />
-    <Compile Include="MVC-View\Authenticate\Authentication.cs">
+    <Compile Include="MVC-Model\Patient_IPD_Model.cs" />
+    <Compile Include="MVC-Model\Patient_OPD_Model.cs" />
+    <Compile Include="MVC-Model\Patient_Transfer_Model.cs" />
+    <Compile Include="MVC-View\Authenticate\FingerPrint\Authentication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MVC-View\Authenticate\Authentication.Designer.cs">
+    <Compile Include="MVC-View\Authenticate\FingerPrint\Authentication.Designer.cs">
       <DependentUpon>Authentication.cs</DependentUpon>
     </Compile>
-    <Compile Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.cs">
+    <Compile Include="MVC-View\Authenticate\UpdatePatientFormDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.Designer.cs">
-      <DependentUpon>FingerPrint Authentication.cs</DependentUpon>
+    <Compile Include="MVC-View\Authenticate\UpdatePatientFormDetail.Designer.cs">
+      <DependentUpon>UpdatePatientFormDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-View\Dashboard\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MVC-View\Dashboard\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Dashboard\Reg&amp;Auth_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Dashboard\Reg&amp;Auth_Form.Designer.cs">
+      <DependentUpon>Reg&amp;Auth_Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\ID-Printer\IDCardPrinting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\ID-Printer\IDCardPrinting.Designer.cs">
+      <DependentUpon>IDCardPrinting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Ipd\IPD-Record.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Ipd\IPD-Record.Designer.cs">
+      <DependentUpon>IPD-Record.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-View\Ipd\PatientIPDForm.cs">
       <SubType>Form</SubType>
@@ -224,6 +246,12 @@
     </Compile>
     <Compile Include="MVC-View\Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MVC-View\Opd\OPD-Record.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MVC-View\Opd\OPD-Record.Designer.cs">
+      <DependentUpon>OPD-Record.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC-View\Opd\PatientOPDForm.cs">
       <SubType>Form</SubType>
@@ -254,17 +282,32 @@
     <EmbeddedResource Include="Master.resx">
       <DependentUpon>Master.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MVC-View\Authenticate\Authentication.resx">
+    <EmbeddedResource Include="MVC-View\Authenticate\FingerPrint\Authentication.resx">
       <DependentUpon>Authentication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MVC-View\Authenticate\FingerPrint\FingerPrint Authentication.resx">
-      <DependentUpon>FingerPrint Authentication.cs</DependentUpon>
+    <EmbeddedResource Include="MVC-View\Authenticate\UpdatePatientFormDetail.resx">
+      <DependentUpon>UpdatePatientFormDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Dashboard\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Dashboard\Reg&amp;Auth_Form.resx">
+      <DependentUpon>Reg&amp;Auth_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\ID-Printer\IDCardPrinting.resx">
+      <DependentUpon>IDCardPrinting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Ipd\IPD-Record.resx">
+      <DependentUpon>IPD-Record.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Ipd\PatientIPDForm.resx">
       <DependentUpon>PatientIPDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MVC-View\Opd\OPD-Record.resx">
+      <DependentUpon>OPD-Record.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MVC-View\Opd\PatientOPDForm.resx">
       <DependentUpon>PatientOPDForm.cs</DependentUpon>
@@ -303,9 +346,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVC-View\Authenticate\Barcode\" />
     <Folder Include="MVC-View\BarCode-Scanner\" />
-    <Folder Include="MVC-View\ID-Printer\" />
     <Folder Include="MVC-View\Patient-Transfer\" />
     <Folder Include="MVC-View\Reports\" />
   </ItemGroup>
