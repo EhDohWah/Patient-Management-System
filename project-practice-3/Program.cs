@@ -40,19 +40,22 @@ namespace project_practice_3
                 case 1:
                     formToOpen = new RegisterForm();
                     break;
-                //case 2:
-                //    formToOpen = new PatientIPDForm();
-                //    break;
-                //case 3:
-                //    formToOpen = new Authentication();
-                //    break;
-                //default:
-                //    MessageBox.Show("All windows have been displayed.", "Information");
-                //    break;
+                case 2:
+                    formToOpen = new PatientIPDForm();
+                    break;
+                case 3:
+                    formToOpen = new PatientOPDForm();
+                    break;
+                case 4:
+                    formToOpen = new FingerPrint_Authentication();
+                    break;
+                default:
+                    MessageBox.Show("All windows have been displayed.", "Information");
+                    break;
             }
 
             // Update the launch count for next time
-            Properties.Settings.Default.LaunchCount = (launchCount + 1) % 2;
+            Properties.Settings.Default.LaunchCount = (launchCount + 1) % 5;
             Properties.Settings.Default.Save();
 
             if (formToOpen != null)

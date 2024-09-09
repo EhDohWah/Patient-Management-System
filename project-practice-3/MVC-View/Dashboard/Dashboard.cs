@@ -1,4 +1,5 @@
-﻿using project_practice_3.MVC_View.Ipd;
+﻿using project_practice_3.MVC_View.ID_Printer;
+using project_practice_3.MVC_View.Ipd;
 using project_practice_3.MVC_View.Opd;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,8 @@ namespace project_practice_3.MVC_View.Dashboard
 
         private void BtnGenerateIDCard_Click(object sender, EventArgs e)
         {
-
+            IDCardPrinting idcp = new IDCardPrinting();
+            idcp.ShowDialog();
         }
     }
 }
