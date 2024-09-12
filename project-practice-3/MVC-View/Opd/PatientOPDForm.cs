@@ -17,25 +17,12 @@ namespace project_practice_3.MVC_View.Opd
         public PatientOPDForm()
         {
             InitializeComponent();
-            totalShow();
+           
             activeShow();
             listOPDpatients();
         }
 
-        // Show all OPD patients records
-        private void totalShow()
-        {
-            using (var context = new DatabaseConnection())
-            {
-                // Retrieve the total number of records in Patient OPD
-                int totalOPDRecords = context.Patient_OPD.Count();
-                                      
-
-                // Display the total number 
-                lblOPDNO.Text = totalOPDRecords.ToString();
-            }
-        }
-
+        
         // Show active OPD patients records
         private void activeShow()
         {
@@ -106,7 +93,7 @@ namespace project_practice_3.MVC_View.Opd
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            totalShow();
+            
             activeShow();
             listOPDpatients();
         }

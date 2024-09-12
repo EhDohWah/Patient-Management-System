@@ -158,69 +158,59 @@ namespace project_practice_3.MVC_View.Opd
         {
             try
             {
-                if (validateForm())
+                if (!validateForm())
                 {
-                    // 0 index is for IPD transfer
-                    if(cbxPatientTransfer.SelectedIndex == 0)
+                    MessageBox.Show("Please fill out all required fields correctly.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                using (var context = new DatabaseConnection())
+                {
+                    if (cbxPatientTransfer.SelectedIndex == 0) // 0 index is for IPD transfer
                     {
-                        // save the data inside the IPD table.
-                        using (var context = new DatabaseConnection())
+                        // Save the data inside the IPD table.
+                        var newIPD = new Patient_IPD_Model
                         {
-                            var newIPD = new Patient_IPD_Model
-                            {
-                                AN = tbxIPDAN.Text,
-                                PID = PID,
-                                SiteCode = tbxIPDSiteCode.Text,
-                                AdmitDate = dtpAdmitDate.Value,
-                                Status = "Active",
-                            };
+                            AN = tbxIPDAN.Text,
+                            PID = PID,
+                            SiteCode = tbxIPDSiteCode.Text,
+                            AdmitDate = dtpAdmitDate.Value,
+                            Status = "Active",
+                        };
 
-                            context.Patient_IPD.Add(newIPD);
-                            context.SaveChanges();
+                        context.Patient_IPD.Add(newIPD);
+
+                        // Update OPD status
+                        var existingPatientOPD = context.Patient_OPD.SingleOrDefault(p => p.PID == PID);
+                        if (existingPatientOPD != null)
+                        {
+                            existingPatientOPD.Status = "Transferred";
                         }
 
-                        // update OPD status
-                        using (var context = new DatabaseConnection())
+                        // Record in the patient transfer
+                        var newPatientTransfer = new Patient_Transfer_Model
                         {
-                            //PID
-                            string pidToUpdate = PID;
+                            Id = (context.Patient_Transfer.Max(f => (int?)f.Id) ?? 0) + 1,
+                            PID = PID,
+                            Date = DateTime.Now,
+                            From = "OPD",
+                            To = "IPD",
+                        };
 
-                            // Retrieve the existing record
-                            var existingPatientOPD = context.Patient_OPD.SingleOrDefault(p => p.PID == pidToUpdate);
-                            if (existingPatientOPD != null)
-                            {
-                                existingPatientOPD.Status = "Transferred";
-                                context.SaveChanges();
-                            }
-                        }
+                        context.Patient_Transfer.Add(newPatientTransfer);
 
-                        // record in the patient transfer
-                        // Save data into TransferTable
-                        using (var context = new DatabaseConnection())
-                        {
-                            var newPatientTransfer = new Patient_Transfer_Model
-                            {
-                                Id = (context.Patient_Transfer.Max(f => (int?)f.Id) ?? 0) + 1,
-                                PID = PID,
-                                Date = DateTime.Now,
-                                From = "OPD",
-                                To = "IPD",
-                            };
-
-                            context.Patient_Transfer.Add(newPatientTransfer);
-                            context.SaveChanges();
-                        }
+                        context.SaveChanges();
                     }
                 }
 
-                MessageBox.Show("The patient has been successfully transferred.", "Transfer Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                
+                MessageBox.Show("The patient has been successfully transferred from OPD to IPD.", "Transfer Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"An error occurred during the transfer: {ex.Message}", "Transfer Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void reloadData()

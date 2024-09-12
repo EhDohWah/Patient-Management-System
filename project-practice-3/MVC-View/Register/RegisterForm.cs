@@ -845,6 +845,8 @@ namespace project_practice_3.MVC_View.Register
 
         private void BtnPID_Click(object sender, EventArgs e)
         {
+            ClearImage();
+            lblStatusLabel.Text = "";
             // Check if registration with finger-prints or not. 
             if (fingerprintTemplates.Count == 0)
             {
@@ -877,6 +879,9 @@ namespace project_practice_3.MVC_View.Register
                     gbxFingerPrintStatus.Enabled = false;
                     btnPID.Text = "PID";
                     btnPID.Enabled = false;
+                    ClearImage();
+                    lblStatusLabel.Text = "";
+
                 }
             } else
             {

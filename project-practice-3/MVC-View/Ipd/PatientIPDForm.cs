@@ -18,23 +18,9 @@ namespace project_practice_3.MVC_View.Ipd
         public PatientIPDForm()
         {
             InitializeComponent();
-            totalShow();
+            
             activeShow();
             listIPDPatients();
-        }
-
-        // Show all the records from IPD
-        private void totalShow()
-        {
-            using (var context = new DatabaseConnection())
-            {
-                // Retrieve the total number of records in Patient OPD
-                int totalIPDRecords = context.Patient_IPD.Count();
-
-
-                // Display the total number 
-                lblIPDNO.Text = totalIPDRecords.ToString();
-            }
         }
 
         // Get all the records, which is active
@@ -47,8 +33,17 @@ namespace project_practice_3.MVC_View.Ipd
                                       .Where(opd => opd.Status == "Active")
                                       .Count();
 
-                // Display the total number 
-                lblIPDActiveNo.Text = totalOPDRecords.ToString();
+                if (totalOPDRecords > 0)
+                {
+                    // Display the total number 
+                    lblIPDActiveNo.Text = totalOPDRecords.ToString();
+                } else if (totalOPDRecords <= 0)
+                {
+                    // Display the total number 
+                    lblIPDActiveNo.Text = "0";
+                }
+                
+
             }
         }
 
@@ -81,7 +76,7 @@ namespace project_practice_3.MVC_View.Ipd
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            totalShow();
+            
             activeShow();
             listIPDPatients();
         }
